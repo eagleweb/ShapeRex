@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Poppins";
+    src: url('./assets/fonts/Poppins-Medium.otf') format("opentype");
+    font-style: normal;
+}
+
+.wrapper {
+    font-family: Poppins, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
