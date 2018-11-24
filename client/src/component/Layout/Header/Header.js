@@ -4,15 +4,20 @@ import s from './header.module.css'
 import logo from '../../../assets/img/logo.png'
 
 const Header = () => (
-    <header>
+    <header className={s.header}>
         <div className={s.logo}>
             <img src={logo} alt="ShapeRex"/>
         </div>
-        <ul>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/quiz">Quiz</NavLink></li>
-            <li><NavLink to="/contact">Contact</NavLink></li>
-        </ul>
+        <nav>
+            <ul className={s.menu}>
+                <li><NavLink exact activeClassName={s.item_active} to="/">Home</NavLink></li>
+                <li><NavLink activeClassName={s.item_active} to="/quiz">Quiz</NavLink></li>
+                <li><NavLink activeClassName={s.item_active} to="/contact">Contact</NavLink></li>
+            </ul>
+        </nav>
+        <div className={s.login}>
+            <span>Log in</span>
+        </div>
     </header>
 
 );

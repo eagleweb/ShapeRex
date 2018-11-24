@@ -1,3 +1,35 @@
-.logo {
-    margin-left: 45px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+.logo {
+    margin: 28px 0 0 45px;
+}
+
+.menu li {
+    display: inline-block;
+    line-height: 30px;
+}
+
+.menu > li > a {
+    position: relative;
+    margin: 28px 10px 0 0;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.menu li:hover {
+    text-decoration: underline;
+}
+
+.item_active {
+    color: green;
+}
+
+.login {
+    margin: 28px 32px 0 0;
+}
+
+

@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
-import s from './Layout.module.css'
+import s from './layout.module.css'
 
 const Layout = (props) => (
     <div className={s.container}>
         <Header />
-        <main>
+        <main className={s.content}>
               {props.children}
         </main>
         <Footer />
