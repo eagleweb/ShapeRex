@@ -43,6 +43,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: true,
+                            localIdentName: "[name]__[local]___[hash:base64:5]",
                             sourceMap: true
                         }
                     },
@@ -51,7 +52,7 @@ module.exports = {
                         options: {
                             plugins: [
                                 autoprefixer({
-                                    browsers:['ie >= 11', 'last 4 version']
+                                    browsers:['>1%', 'ie >= 11', 'last 4 version']
                                 })
                             ],
                             sourceMap: true
