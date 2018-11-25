@@ -1,4 +1,4 @@
-export const quiz = [
+const quiz = [
     {
         id: 1,
         quizname: 'Quiz1',
@@ -35,5 +35,44 @@ export const quiz = [
             }
         ],
         added: '2015'
+    },
+    {
+        id: 2,
+        quizname: 'Quiz2',
+        questions: [
+            {
+                idquestions: 1,
+                questions: 'Where are from?',
+                variant: [
+                    {
+                        idvariant: 1,
+                        answer: 'New-York'
+                    },
+                    {
+                        idvariant: 2,
+                        answer: 'Los-Angels'
+                    },
+                ],
+                rightanswer: 2
+            },
+            {
+                idquestions: 2,
+                questions: 'What is your name',
+                variant: [
+                    {
+                        idvariant: 1,
+                        answer: 'Slava'
+                    },
+                    {
+                        idvariant: 2,
+                        answer: 'Lena'
+                    },
+                ],
+                rightanswer: 1
+            }
+        ],
+        added: '2019'
     }
 ];
+
+export default quiz;
