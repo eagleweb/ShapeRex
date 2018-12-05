@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import quiz from '../../../mocks/quiz'
+import { connect } from 'react-redux'
+import { getQuiz } from '../../../actions/quizActions'
 
 class QuestionPage extends Component {
 
@@ -7,12 +8,31 @@ class QuestionPage extends Component {
         super(props);
     }
 
-    render(){
-        return (
-            <p>{quiz[0].quizname}</p>
-        )
+    componentDidMount() {
+        this.props.getQuiz(this.props.match.params.id);
     }
 
+    render(){
+        const quiz = this.props.quiz;
+
+        return (
+            <div>
+            <h2>{quiz.quiz_name}</h2>
+            {/*<p>{quiz.questions.question}</p>*/}
+                <ul>
+                    {quiz.questions.answer_variant.map((item) =>
+                        <li key={item._id}>{item}</li>
+                    )}
+                </ul>
+            </div>
+        )
+    }
 }
 
-export default QuestionPage
+const mapStateToProps = state => {
+    return {
+        quiz: state.quizzes.quiz
+    }
+};
+
+export default connect(mapStateToProps, {getQuiz})(QuestionPage)

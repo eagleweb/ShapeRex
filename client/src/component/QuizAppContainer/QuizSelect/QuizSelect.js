@@ -1,15 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import quiz from '../../../mocks/quiz'
+import { getAllQuizzes } from '../../../actions/quizActions'
 
-const QuizSelect = ({match}) => (
-    <div>
-        <ul>
-            {quiz.map((item) =>
-                <li key={item.id}><Link to={`quiz/${item.id}`}>{item.quizname}</Link></li>
-            )}
-        </ul>
-    </div>
-);
+class QuizSelect extends Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default QuizSelect
+    componentDidMount() {
+        this.props.getAllQuizzes();
+    }
+
+    render(){
+        const {quizzes} = this.props.quizzes;
+        return (
+            <div>
+                <ul>
+                    {quizzes.map((item) =>
+                        <li key={item._id}><Link to={`quiz/${item._id}`}>{item.quiz_name}</Link></li>
+                    )}
+                </ul>
+            </div>
+        )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        quizzes: state.quizzes
+    }
+};
+
+export default connect(mapStateToProps, {getAllQuizzes})(QuizSelect)

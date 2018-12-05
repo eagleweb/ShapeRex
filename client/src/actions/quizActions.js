@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getAllQuizzes  = () => dispatch => {
     dispatch(setItemsLoading());
-    axios.get('/api/quiz').then(res =>
+    axios.get('http://localhost:8081/api/quiz').then(res =>
         dispatch({
             type: GET_ALL_QUIZZES,
             payload: res.data
@@ -13,7 +13,7 @@ export const getAllQuizzes  = () => dispatch => {
 
 export const getQuiz = id => dispatch => {
     dispatch(setItemsLoading());
-    axios.get(`api/quiz/${id}`).then(res =>
+    axios.get(`http://localhost:8081/api/quiz/${id}`).then(res =>
         dispatch({
             type: GET_QUIZ,
             payload: res.data

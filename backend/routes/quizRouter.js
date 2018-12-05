@@ -13,12 +13,15 @@ quizRouter.route('/')
         })
     })
 
+
     .post(function (req, res) {
+        console.log(req.body);
         if (!req.body) {
-            res.json({success: false, message: 'Please enter your question'});
+            res.json({success: false, message: 'Please enter your quiz'});
         } else {
             const newQuiz = new Quiz({
                 quiz_name: req.body.quiz_name,
+                questions: req.body.questions,
                 quiz_answer: req.body.quiz_answer
             });
 
@@ -32,6 +35,15 @@ quizRouter.route('/')
                 res.json({success: true, message: 'Question added successfully'});
             })
         }
+    });
+
+quizRouter.route('/:quiz_id')
+
+    .get(function (req, res) {
+        Quiz.findById(req.params.quiz_id, function (err, result) {
+            if (err) res.send(err);
+            res.json(result);
+        })
     });
 
 module.exports = quizRouter;
