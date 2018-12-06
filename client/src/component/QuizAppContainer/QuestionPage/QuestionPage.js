@@ -14,16 +14,10 @@ class QuestionPage extends Component {
 
     render(){
         const quiz = this.props.quiz;
-
         return (
             <div>
             <h2>{quiz.quiz_name}</h2>
-            {/*<p>{quiz.questions.question}</p>*/}
-                <ul>
-                    {quiz.questions.answer_variant.map((item) =>
-                        <li key={item._id}>{item}</li>
-                    )}
-                </ul>
+                {quiz.questions ? <p>{quiz.questions.map((item) => <li key={item._id}>{item.question}</li>)}</p> : <p>Loading...</p>}
             </div>
         )
     }

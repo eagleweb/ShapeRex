@@ -1,7 +1,7 @@
 import {GET_ALL_QUIZZES, GET_QUIZ, ADD_QUIZ, DELETE_QUIZ, QUIZ_LOADING} from "../actions/types"
 
 const initialState = {
-    quizzes: [],
+    quizzes_list: [],
     quiz: {},
     loading: false
 };
@@ -9,7 +9,7 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_ALL_QUIZZES:
-            return {...state, quizzes: action.payload};
+            return {...state, quizzes_list: action.payload};
         case GET_QUIZ:
             return {...state, quiz: action.payload};
         case ADD_QUIZ:

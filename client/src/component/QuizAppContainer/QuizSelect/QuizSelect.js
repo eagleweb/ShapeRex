@@ -13,11 +13,12 @@ class QuizSelect extends Component {
     }
 
     render(){
-        const {quizzes} = this.props.quizzes;
+        const quizzes_list = this.props.quizzes_list;
+
         return (
             <div>
                 <ul>
-                    {quizzes.map((item) =>
+                    {quizzes_list.map((item) =>
                         <li key={item._id}><Link to={`quiz/${item._id}`}>{item.quiz_name}</Link></li>
                     )}
                 </ul>
@@ -28,7 +29,7 @@ class QuizSelect extends Component {
 
 const mapStateToProps = state => {
     return {
-        quizzes: state.quizzes
+        quizzes_list: state.quizzes.quizzes_list
     }
 };
 
