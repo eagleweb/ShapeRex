@@ -1,23 +1,30 @@
-import {GET_ALL_QUIZZES, GET_QUIZ, ADD_QUIZ, DELETE_QUIZ, QUIZ_LOADING} from "../actions/types"
+import * as types from "../actions/types"
 
 const initialState = {
     quizzes_list: [],
     quiz: {},
-    loading: false
+    isLoading: false,
+    error: null
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case GET_ALL_QUIZZES:
-            return {...state, quizzes_list: action.payload};
-        case GET_QUIZ:
-            return {...state, quiz: action.payload};
-        case ADD_QUIZ:
+        case types.GET_ALL_QUIZZES_START:
+            return {...state, isLoading: true, error: null};
+        case types.GET_ALL_QUIZZES_SUCCESS:
+            return {...state, isLoading: false, quizzes_list: action.payload};
+        case types.GET_ALL_QUIZZES_ERROR:
+            return {...state, error: action.payload};
+        case types.GET_QUIZ_START:
+            return {...state, isLoading: true, error: null};
+        case types.GET_QUIZ_SUCCESS:
+            return {...state, isLoading: false, quiz: action.payload};
+        case types.GET_QUIZ_ERROR:
+            return {...state, error: action.payload};
+        case types.ADD_QUIZ:
             return {...state, quizzes: [...state.quizzes, action.payload]};
-        case DELETE_QUIZ:
+        case types.DELETE_QUIZ:
             return {...state, quizzes: state.quizzes.filter(quiz => quiz._id !== action.payload)};
-        case QUIZ_LOADING:
-            return {...state, loading: true};
         default: return state
     }
 }

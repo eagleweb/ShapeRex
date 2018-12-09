@@ -1,24 +1,36 @@
-import {GET_QUIZ, ADD_QUIZ, DELETE_QUIZ, QUIZ_LOADING, GET_ALL_QUIZZES} from './types'
+import * as types from './types'
 import axios from 'axios'
 
 export const getAllQuizzes  = () => dispatch => {
-    dispatch(setItemsLoading());
-    axios.get('http://localhost:8081/api/quiz').then(res =>
-        dispatch({
-            type: GET_ALL_QUIZZES,
+    dispatch({
+        type: types.GET_ALL_QUIZZES_START
+    });
+
+    axios.get('http://localhost:8081/api/quiz')
+        .then(res => dispatch({
+            type: types.GET_ALL_QUIZZES_SUCCESS,
             payload: res.data
-        })
-    );
+        }))
+        .catch (error => dispatch ({
+            type: types.GET_ALL_QUIZZES_ERROR,
+            payload: error.message
+        }))
 };
 
 export const getQuiz = id => dispatch => {
-    dispatch(setItemsLoading());
-    axios.get(`http://localhost:8081/api/quiz/${id}`).then(res =>
-        dispatch({
-            type: GET_QUIZ,
+    dispatch({
+        type: types.GET_QUIZ_START
+    });
+
+    axios.get(`http://localhost:8081/api/quiz/${id}`)
+        .then(res => dispatch ({
+            type: types.GET_QUIZ_SUCCESS,
             payload: res.data
-        })
-    );
+        }))
+        .catch (error => dispatch ({
+            type: types.GET_QUIZ_ERROR,
+            payload: error.message
+        }))
 };
 
 export const addQiuz = quiz => dispatch => {
@@ -37,10 +49,4 @@ export const deleteQuiz = id => dispatch => {
             payload: id
         })
     );
-};
-
-export const setItemsLoading = () => {
-    return {
-        type: QUIZ_LOADING
-    };
 };
