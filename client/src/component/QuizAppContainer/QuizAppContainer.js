@@ -2,9 +2,10 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import QuizSelect from './QuizSelect/QuizSelect'
 import QuestionPage from './QuestionPage/QuestionPage'
+import s from './quizappcontainer.module.css'
 
 const QuizAppContainer = ({match}) => (
-    <div>
+    <div className={s.container}>
         <div>Menu</div>
 
         <Switch>
