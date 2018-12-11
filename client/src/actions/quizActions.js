@@ -6,7 +6,7 @@ export const getAllQuizzes  = () => dispatch => {
         type: types.GET_ALL_QUIZZES_START
     });
 
-    axios.get('http://localhost:8081/api/quiz')
+    axios.get('/api/quiz')
         .then(res => dispatch({
             type: types.GET_ALL_QUIZZES_SUCCESS,
             payload: res.data
@@ -22,7 +22,7 @@ export const getQuiz = id => dispatch => {
         type: types.GET_QUIZ_START
     });
 
-    axios.get(`http://localhost:8081/api/quiz/${id}`)
+    axios.get(`/api/quiz/${id}`)
         .then(res => dispatch ({
             type: types.GET_QUIZ_SUCCESS,
             payload: res.data

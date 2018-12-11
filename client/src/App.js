@@ -6,6 +6,8 @@ import Page404 from './component/404/Page404'
 import Home from './component/Home/Home'
 import QuizAppContainer from './component/QuizAppContainer/QuizAppContainer'
 import Contact from './component/Contact/Contact'
+import Register from './component/Authorization/Register'
+import Login from './component/Authorization/Login'
 
 const history = createBrowserHistory();
 
@@ -17,8 +19,11 @@ export default class App extends Component {
                         <Switch>
                         <Route exact path="/" component={Home} />
                         <Route path="/quiz" component={QuizAppContainer} />
-                            {/*<Route path="/quiz/:id" render={ (props) => "Hello"} />*/}
                         <Route path="/contact" component={Contact} />
+                            <div className="container">
+                                <Route path="/register" component={Register} />
+                                <Route path="/login" component={Login} />
+                            </div>
                         <Route component={Page404} />
                         </Switch>
                 </Layout>
