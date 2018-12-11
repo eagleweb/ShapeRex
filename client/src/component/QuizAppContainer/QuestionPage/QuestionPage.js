@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
 import T from 'prop-types';
 import { connect } from 'react-redux'
+import Countdown from 'react-countdown-now'
 import { getQuiz } from '../../../actions/quizActions'
 import QuestionView from './QuestionView'
 import { Button } from 'reactstrap';
@@ -12,7 +12,8 @@ class QuestionPage extends Component {
         super(props);
         this.renderQuiz = this.renderQuiz.bind(this);
         this.state = {
-            flag: true
+            flag: true,
+            time_end: false
         };
     }
 
@@ -43,7 +44,8 @@ class QuestionPage extends Component {
         return (
             <div>
                 <h2>{quiz.quiz_name}</h2>
-                {quiz.questions ? <QuestionView questions={quiz.questions} quiz_answer={quiz.quiz_answer} /> : null}
+                Time: <Countdown onComplete={() => this.setState({time_end: true})} renderer={({minutes, seconds}) => <span>{minutes}:{seconds}</span>} date={Date.now() + 10000} />
+                {quiz.questions ? <QuestionView time_end={this.state.time_end} questions={quiz.questions} quiz_answer={quiz.quiz_answer} /> : null}
             </div>
         )
     }

@@ -10,11 +10,8 @@ class Question extends Component {
         this.renderQuiz = this.renderQuiz.bind(this);
 
         this.state = {
-            questions: props.questions,
-            quiz_answer: props.quiz_answer,
-            length: props.questions.length,
             current: 0,
-            answer: [],
+            user_answer: [],
             value: null
         };
     }
@@ -24,14 +21,14 @@ class Question extends Component {
     }
 
     nextQuestion () {
-        this.state.answer.push(+this.state.value);
+        this.state.user_answer.push(+this.state.value);
         this.setState({current: this.state.current + 1});
     }
 
     renderQuiz () {
-        const current_question = this.state.questions[this.state.current];
-        if (this.state.current === this.state.length) {
-            return <QuizResult answer={this.state.answer} quiz_answer={this.state.quiz_answer} />
+        const current_question = this.props.questions[this.state.current];
+        if (this.state.current === this.props.questions.length || this.props.time_end) {
+            return <QuizResult user_answer={this.state.user_answer} quiz_answer={this.props.quiz_answer} />
         } return (
             <Card>
                 <CardHeader>{current_question.question}</CardHeader>
@@ -47,8 +44,9 @@ class Question extends Component {
                         <Button color="success" onClick={this.nextQuestion}>Answer</Button>
                     </Form>
                 </CardBody>
-                <CardFooter>Current question: {this.state.current + 1} Total: {this.state.length}</CardFooter>
-            </Card>)
+                <CardFooter>Current: {this.state.current + 1} Total: {this.props.questions.length}</CardFooter>
+            </Card>
+        )
     }
 
     render() {
