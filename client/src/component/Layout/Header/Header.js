@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../../actions/authActions';
@@ -7,6 +7,11 @@ import s from './header.module.css'
 import logo from '../../../assets/img/logo.png'
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);
+        this.onLogout = this.onLogout.bind(this);
+    }
 
     onLogout(e) {
         e.preventDefault();
@@ -17,7 +22,7 @@ class Header extends Component {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-                <a href="#" className="nav-link" onClick={this.onLogout.bind(this)}>
+                <a href="#" className="nav-link" onClick={this.onLogout}>
                     <img src={user.avatar} alt={user.name} title={user.name}
                          className="rounded-circle"
                          style={{ width: '25px', marginRight: '5px'}} />
@@ -35,6 +40,7 @@ class Header extends Component {
                 </li>
             </ul>
         );
+
         return (
         <header className={s.header}>
             <div className={s.logo}>
@@ -48,7 +54,6 @@ class Header extends Component {
                 </ul>
             </nav>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Redux Node Auth</Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
@@ -67,4 +72,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser })(Header);
+export default connect(mapStateToProps, { logoutUser })(withRouter(Header));

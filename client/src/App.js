@@ -20,10 +20,8 @@ export default class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route path="/quiz" component={QuizAppContainer} />
                         <Route path="/contact" component={Contact} />
-                            <div className="container">
-                                <Route path="/register" component={Register} />
-                                <Route path="/login" component={Login} />
-                            </div>
+                        <Route path="/register" component={Register} />
+                        <Route path="/login" component={Login} />
                         <Route component={Page404} />
                         </Switch>
                 </Layout>
