@@ -21,22 +21,20 @@ class Header extends Component {
     render() {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
-            <ul className="navbar-nav ml-auto">
-                <a href="#" className="nav-link" onClick={this.onLogout}>
-                    <img src={user.avatar} alt={user.name} title={user.name}
-                         className="rounded-circle"
-                         style={{ width: '25px', marginRight: '5px'}} />
-                    Logout
+            <ul className={s.login}>
+                <a href="#" onClick={this.onLogout}>
+                    <img src={user.avatar} alt={user.name} title={user.name} className={s.avatar}/>
+                    <span>Logout</span>
                 </a>
             </ul>
         );
         const guestLinks = (
-            <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to="/register">Sign Up</Link>
+            <ul className={s.login}>
+                <li>
+                    <Link to="/register">Sign Up</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/login">Sign In</Link>
+                <li>
+                    <Link to="/login">Sign In</Link>
                 </li>
             </ul>
         );
@@ -44,7 +42,9 @@ class Header extends Component {
         return (
         <header className={s.header}>
             <div className={s.logo}>
-                <img src={logo} alt="ShapeRex"/>
+                <Link to="/">
+                    <img src={logo} alt="ShapeRex"/>
+                </Link>
             </div>
             <nav>
                 <ul className={s.menu}>
@@ -53,8 +53,8 @@ class Header extends Component {
                     <li><NavLink activeClassName={s.item_active} to="/contact">Contact</NavLink></li>
                 </ul>
             </nav>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <nav>
+                <div className={s.login}>
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
             </nav>
@@ -72,4 +72,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(Header));
+export default withRouter(connect(mapStateToProps, { logoutUser })(Header))

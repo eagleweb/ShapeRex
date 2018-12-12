@@ -1,0 +1,17 @@
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    width: 700px;
+}
+
+.container h2 {
+    margin-bottom: 30px;
+    font-size: 1.3rem;
+}
+
+.input {
+    /*max-width: 100px;*/
+}
