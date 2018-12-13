@@ -21,6 +21,12 @@ export default function (state = initialState, action) {
             return {...state, isLoading: false, quiz: action.payload};
         case types.GET_QUIZ_ERROR:
             return {...state, error: action.payload};
+        case types.SEARCH_QUIZ_START:
+            return {...state, isLoading: true, error: null};
+        case types.SEARCH_QUIZ_SUCCESS:
+            return {...state, isLoading: false, quizzes_list: action.payload};
+        case types.SEARCH_QUIZ_ERROR:
+            return {...state, error: action.payload};
         case types.ADD_QUIZ:
             return {...state, quizzes: [...state.quizzes, action.payload]};
         case types.DELETE_QUIZ:

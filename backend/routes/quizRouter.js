@@ -7,7 +7,7 @@ const Quiz = require('../models/quiz');
 quizRouter.route('/')
 
     .get(function (req, res) {
-        Quiz.find({},{quiz_name: 1}, function (err, result) {
+        Quiz.find({},{quiz_name: 1, quiz_tag: 1, added: 1, quiz_description: 1}, function (err, result) {
             if (err) res.send(err);
             res.json(result);
         })
@@ -15,12 +15,13 @@ quizRouter.route('/')
 
 
     .post(function (req, res) {
-        console.log(req.body);
         if (!req.body) {
             res.json({success: false, message: 'Please enter your quiz'});
         } else {
             const newQuiz = new Quiz({
                 quiz_name: req.body.quiz_name,
+                quiz_description: req.body.quiz_description,
+                quiz_tag: req.body.quiz_tag,
                 questions: req.body.questions,
                 quiz_answer: req.body.quiz_answer
             });
@@ -35,6 +36,23 @@ quizRouter.route('/')
                 res.json({success: true, message: 'Question added successfully'});
             })
         }
+    });
+
+quizRouter.route('/search')
+
+    .get(function (req, res) {
+        if (req.query.search === undefined || req.query.search === '') {
+            res.json({success: false, message: 'Enter your search request!'});
+        } else
+            Quiz.find({ $text : { $search : req.query.search } }, { score : { $meta: "textScore" }, quiz_name: 1, quiz_tag: 1, added: 1, quiz_description: 1 })
+                .sort({ score : { $meta : 'textScore' } })
+                // .limit(10)
+                .exec(function(err, result) {
+                    if (err) res.send(err);
+                    if (result.length === 0) {
+                        res.json({message: 'Nothing was found. Sorry! Try another request.'})
+                    } else res.json(result)
+                });
     });
 
 quizRouter.route('/:quiz_id')

@@ -9,10 +9,14 @@ const QuestionSchema = new Schema({
 
 const QuizSchema = new Schema({
     quiz_name: {type: String, required: true, unique: true},
+    quiz_description: {type: String},
+    quiz_tag: {type: Array},
     questions: [QuestionSchema],
     added: {type: Date, required: true, default: Date.now},
     quiz_answer: {type: Array, required: true}
 });
+
+    QuizSchema.index({'quiz_name': 'text', 'quiz_description': 'text', 'quiz_tag': 'text'});
 
 
 module.exports = mongoose.model('Quiz', QuizSchema);

@@ -33,6 +33,22 @@ export const getQuiz = id => dispatch => {
         }))
 };
 
+export const searchQuiz = search_phrase => dispatch => {
+    dispatch({
+        type: types.SEARCH_QUIZ_START
+    });
+
+    axios.get('/api/quiz/search/', {params: {search: search_phrase}})
+        .then(res => dispatch ({
+            type: types.SEARCH_QUIZ_SUCCESS,
+            payload: res.data
+        }))
+        .catch (error => dispatch ({
+            type: types.SEARCH_QUIZ_ERROR,
+            payload: error.message
+        }))
+};
+
 export const addQiuz = quiz => dispatch => {
     axios.post('/api/quiz', quiz).then(res =>
         dispatch({
