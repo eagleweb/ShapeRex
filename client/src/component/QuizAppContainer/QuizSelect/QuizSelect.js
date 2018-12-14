@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { getAllQuizzes, searchQuiz } from '../../../actions/quizActions'
-import s from './quizselect.module.css'
-import { InputGroup, InputGroupAddon, Input, Card, Button, CardImg, CardTitle, CardText, CardGroup, CardBody } from 'reactstrap';
+import isEmpty from '../../../validation/is-empty';
+import ToolBar from './ToolBarView'
+import CardView from './CardView'
 
 class QuizSelect extends Component {
     constructor(props) {
         super(props);
         this.state = {
             sorted: true,
-            search_phrase: null
+            search_phrase: null,
+            message: null
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.setSearchPhrase = this.setSearchPhrase.bind(this);
         this.SortByName = this.SortByName.bind(this);
         this.SortByDate = this.SortByDate.bind(this);
         this.StartSearch = this.StartSearch.bind(this);
+        this.renderQuizSelect = this.renderQuizSelect.bind(this);
     }
 
     componentDidMount() {
@@ -52,53 +54,66 @@ class QuizSelect extends Component {
         this.setState({quizzes_list: sorted});
     }
 
-    handleChange(event) {
+    setSearchPhrase (event) {
         this.setState({search_phrase: event.target.value});
     }
 
-    StartSearch () {
-        this.props.searchQuiz(this.state.search_phrase)
+    StartSearch (event) {
+        event.preventDefault();
+        if (isEmpty(this.state.search_phrase)) {
+            this.setState({message: 'Enter your search request'})
+        } else {
+            this.setState({message: null});
+            this.props.searchQuiz(this.state.search_phrase)
+        }
+    }
+
+    renderQuizSelect () {
+        if (this.props.isLoading) {
+            return <div>Loading...</div>
+        }
+        if (this.props.quizzes_list.length === 0) {
+            return (
+                <div>
+                    <ToolBar
+                        message={this.state.message}
+                        // search_phrase={this.state.search_phrase}
+                        setSearchPhrase={this.setSearchPhrase}
+                        StartSearch={this.StartSearch}
+                        SortByName={this.SortByName}
+                        SortByDate={this.SortByDate}
+                    />
+                    <div>Nothing find. Sorry!</div>
+                </div>
+            )
+        }
+        return (
+            <div>
+                <ToolBar
+                    message={this.state.message}
+                    setSearchPhrase={this.setSearchPhrase}
+                    StartSearch={this.StartSearch}
+                    SortByName={this.SortByName}
+                    SortByDate={this.SortByDate}
+                />
+                <CardView quizzes_list={this.props.quizzes_list}/>
+            </div>
+        )
     }
 
     render(){
-        const quizzes_list = this.props.quizzes_list;
-
         return (
-            <div>
-                <div className={s.tool_bar}>
-                    <InputGroup>
-                        <Input placeholder="Enter your search" onChange={this.handleChange} />
-                        <InputGroupAddon addonType="append">
-                            <Button onClick={this.StartSearch} color="success">Search</Button>
-                        </InputGroupAddon>
-                    </InputGroup>
-                    <button onClick={this.SortByName}>
-                        Sort
-                    </button>
-                    <button onClick={this.SortByDate}>
-                        Date
-                    </button>
-                </div>
-                <CardGroup>
-                    {quizzes_list.map((item) =>
-                    <Card key={item._id} className={s.card_item}>
-                        <CardImg top src="" alt="" />
-                        <CardBody>
-                            <CardTitle>{item.quiz_name}</CardTitle>
-                            <CardText>{item.quiz_description}</CardText>
-                            <Link to={`quiz/${item._id}`}><Button>Start</Button></Link>
-                        </CardBody>
-                    </Card>
-                    )}
-                </CardGroup>
-            </div>
+            <React.Fragment>
+                {this.renderQuizSelect()}
+            </React.Fragment>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
-        quizzes_list: state.quizzes.quizzes_list
+        quizzes_list: state.quizzes.quizzes_list,
+        isLoading: state.quizzes.isLoading
     }
 };
 

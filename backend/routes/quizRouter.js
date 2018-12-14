@@ -49,9 +49,7 @@ quizRouter.route('/search')
                 // .limit(10)
                 .exec(function(err, result) {
                     if (err) res.send(err);
-                    if (result.length === 0) {
-                        res.json({message: 'Nothing was found. Sorry! Try another request.'})
-                    } else res.json(result)
+                    res.json(result)
                 });
     });
 
