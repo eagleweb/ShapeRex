@@ -4,7 +4,8 @@ const initialState = {
     quizzes_list: [],
     quiz: {},
     isLoading: false,
-    error: null
+    error: null,
+    search_result: false
 };
 
 export default function (state = initialState, action) {
@@ -12,7 +13,7 @@ export default function (state = initialState, action) {
         case types.GET_ALL_QUIZZES_START:
             return {...state, isLoading: true, error: null};
         case types.GET_ALL_QUIZZES_SUCCESS:
-            return {...state, isLoading: false, quizzes_list: action.payload};
+            return {...state, isLoading: false, quizzes_list: action.payload,  search_result: false};
         case types.GET_ALL_QUIZZES_ERROR:
             return {...state, error: action.payload};
         case types.GET_QUIZ_START:
@@ -24,7 +25,7 @@ export default function (state = initialState, action) {
         case types.SEARCH_QUIZ_START:
             return {...state, isLoading: true, error: null};
         case types.SEARCH_QUIZ_SUCCESS:
-            return {...state, isLoading: false, quizzes_list: action.payload};
+            return {...state, isLoading: false, quizzes_list: action.payload.result, search_result: action.payload.search_result};
         case types.SEARCH_QUIZ_ERROR:
             return {...state, error: action.payload};
         case types.ADD_QUIZ:

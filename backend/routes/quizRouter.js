@@ -49,7 +49,8 @@ quizRouter.route('/search')
                 // .limit(10)
                 .exec(function(err, result) {
                     if (err) res.send(err);
-                    res.json(result)
+                    const obj = Object.assign({result: result}, {search_result: true});
+                    res.json(obj)
                 });
     });
 

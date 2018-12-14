@@ -4,6 +4,7 @@ import { getAllQuizzes, searchQuiz } from '../../../actions/quizActions'
 import isEmpty from '../../../validation/is-empty';
 import ToolBar from './ToolBarView'
 import CardView from './CardView'
+import { Button } from 'reactstrap';
 
 class QuizSelect extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class QuizSelect extends Component {
         this.SortByDate = this.SortByDate.bind(this);
         this.StartSearch = this.StartSearch.bind(this);
         this.renderQuizSelect = this.renderQuizSelect.bind(this);
+        this.BackToQuiz = this.BackToQuiz.bind(this);
     }
 
     componentDidMount() {
@@ -64,8 +66,15 @@ class QuizSelect extends Component {
             this.setState({message: 'Enter your search request'})
         } else {
             this.setState({message: null});
-            this.props.searchQuiz(this.state.search_phrase)
+            this.props.searchQuiz(this.state.search_phrase);
+            this.setState({search_phrase: null});
         }
+    }
+
+    BackToQuiz () {
+        this.setState({message: null});
+        this.setState({search_phrase: null});
+        this.props.getAllQuizzes();
     }
 
     renderQuizSelect () {
@@ -77,17 +86,18 @@ class QuizSelect extends Component {
                 <div>
                     <ToolBar
                         message={this.state.message}
-                        // search_phrase={this.state.search_phrase}
                         setSearchPhrase={this.setSearchPhrase}
                         StartSearch={this.StartSearch}
                         SortByName={this.SortByName}
                         SortByDate={this.SortByDate}
                     />
                     <div>Nothing find. Sorry!</div>
+                    <Button onClick={this.BackToQuiz}>Back to quiz page</Button>
                 </div>
             )
         }
         return (
+
             <div>
                 <ToolBar
                     message={this.state.message}
@@ -96,6 +106,7 @@ class QuizSelect extends Component {
                     SortByName={this.SortByName}
                     SortByDate={this.SortByDate}
                 />
+                {this.props.search_result ? <Button onClick={this.BackToQuiz} >Back to quiz page</Button> : null}
                 <CardView quizzes_list={this.props.quizzes_list}/>
             </div>
         )
@@ -113,7 +124,8 @@ class QuizSelect extends Component {
 const mapStateToProps = state => {
     return {
         quizzes_list: state.quizzes.quizzes_list,
-        isLoading: state.quizzes.isLoading
+        isLoading: state.quizzes.isLoading,
+        search_result: state.quizzes.search_result
     }
 };
 
