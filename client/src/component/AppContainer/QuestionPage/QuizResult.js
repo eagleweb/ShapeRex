@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const QuizResult = ({user_answer, quiz_answer}) => {
 
@@ -28,6 +29,7 @@ const QuizResult = ({user_answer, quiz_answer}) => {
     return (
         <div>
             <p>You result is {Math.round(result)} % of right answer!</p>
+            <NavLink to="/quiz">Back to quiz page</NavLink>
         </div>
     )
 };

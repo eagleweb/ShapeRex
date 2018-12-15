@@ -42,8 +42,9 @@ require('./backend/auth/passport')(passport);
 
 // ROUTES FOR API =====================================================
 
-app.use('/api/quiz', quizRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/quiz', passport.authenticate('jwt', { session: false }));
+app.use('/api/quiz', quizRouter);
 
 
 //START SERVER ========================================================

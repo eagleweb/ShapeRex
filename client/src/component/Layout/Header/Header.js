@@ -21,22 +21,24 @@ class Header extends Component {
     render() {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
-            <ul className={s.login}>
+            <div className={s.login}>
+                <img src={user.avatar} alt={user.name} title={user.name} />
                 <a href="#" onClick={this.onLogout}>
-                    <img src={user.avatar} alt={user.name} title={user.name} className={s.avatar}/>
                     <span>Logout</span>
                 </a>
-            </ul>
+            </div>
         );
         const guestLinks = (
-            <ul className={s.login}>
-                <li>
-                    <Link to="/register">Sign Up</Link>
-                </li>
-                <li>
-                    <Link to="/login">Sign In</Link>
-                </li>
-            </ul>
+            <div className={s.login}>
+                <ul>
+                    <li>
+                        <Link to="/register">Sign Up</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Sign In</Link>
+                    </li>
+                </ul>
+            </div>
         );
 
         return (
@@ -54,9 +56,7 @@ class Header extends Component {
                 </ul>
             </nav>
             <nav>
-                <div className={s.login}>
-                    {isAuthenticated ? authLinks : guestLinks}
-                </div>
+                {isAuthenticated ? authLinks : guestLinks}
             </nav>
         </header>
         )

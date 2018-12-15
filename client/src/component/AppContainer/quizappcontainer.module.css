@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    height: 35px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #525557;
+}
+
+.item_active {
+    color: #fe9017;
+}
+
+
+

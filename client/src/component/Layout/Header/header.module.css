@@ -26,11 +26,11 @@
 }
 
 .item_active {
-    color: green;
+    color: #ffb461;
 }
 
 .login {
-    margin: 20px 45px 0 0;
+    margin: 30px 45px 0 0;
 }
 
 .login span {
@@ -40,21 +40,19 @@
     transform: translateY(-50%);
 }
 
-.login li {
+.login img {
     display: inline-block;
-    line-height: 30px;
-}
-
-.login > li > a {
     position: relative;
-    margin: 28px 10px 0 0;
-    text-decoration: none;
-}
-.avatar {
     width: 25px;
     margin-right: 5px;
     border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.login li {
     display: inline-block;
+    margin-right: 5px;
 }
 
 
