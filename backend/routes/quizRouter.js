@@ -1,8 +1,10 @@
 const express = require('express');
 const quizRouter = express.Router();
 const mongoose = require('mongoose');
+const formidable = require('formidable');
 mongoose.Promise = global.Promise;
 const Quiz = require('../models/quiz');
+const validateQuizInput = require('../validation/quiz');
 
 quizRouter.route('/')
 
@@ -13,29 +15,56 @@ quizRouter.route('/')
         })
     })
 
-
     .post(function (req, res) {
-        if (!req.body) {
-            res.json({success: false, message: 'Please enter your quiz'});
-        } else {
-            const newQuiz = new Quiz({
-                quiz_name: req.body.quiz_name,
-                quiz_description: req.body.quiz_description,
-                quiz_tag: req.body.quiz_tag,
-                questions: req.body.questions,
-                quiz_answer: req.body.quiz_answer
-            });
+        let body = {};
 
-            newQuiz.save(function (err) {
-                if (err) {
-                    console.log(err);
-                    if (err.code === 11000) {
-                        return res.json({success: false, message: 'Adding failed. Question exist.'});
-                    } else res.send(err);
+        new formidable.IncomingForm().parse(req)
+            .on('fileBegin', (name, file) => {
+                const fileType = file.type.split('/').pop();
+                if(fileType === 'jpg' || fileType === 'png' || fileType === 'jpeg' ){
+                    file.path = __dirname + '/../uploads/img/' + file.name;
+                    body.quiz_image = file.name;
+                } else {
+                    errors.quiz_image = 'Image should be only jpg, png, jpeg type';
+                    return res.status(400).json(errors);
                 }
-                res.json({success: true, message: 'Question added successfully'});
             })
-        }
+            .on('field', (name, value) => {
+                body[name] = value;
+                console.log(body);
+            })
+            .on('end', () => {
+                const { errors, isValid } = validateQuizInput(body);
+
+                if(!isValid) {
+                    return res.status(400).json(errors);
+                }
+
+                Quiz.findOne({
+                    quiz_name: body.quiz_name
+                }).then(quiz => {
+                    if(quiz) {
+                        errors.quiz_name = 'Quiz already exist';
+                        return res.status(400).json(errors);
+                    } else {
+                        const newQuiz = new Quiz({
+                            quiz_name: body.quiz_name,
+                            quiz_description: body.quiz_description,
+                            quiz_image: body.quiz_image,
+                            quiz_tag: body.quiz_tag,
+                            questions: body.questions,
+                            quiz_answer: body.quiz_answer
+                        });
+
+                        newQuiz.save(function (err) {
+                            if (err) {
+                                return res.status(400).json(err);
+                            }
+                            res.json({success: true, message: 'Quiz added successfully'});
+                        })
+                    }
+                })
+            })
     });
 
 quizRouter.route('/search')

@@ -1,0 +1,108 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addQuiz } from '../../../actions/quizActions'
+import s from './addquiz.module.css'
+import {Button, Form, FormGroup, FormFeedback, Label, Input, FormText} from 'reactstrap';
+
+class AddQuiz extends Component {
+
+    constructor() {
+        super();
+        this.quiz_image = React.createRef();
+        this.state = {
+            quiz_name: '',
+            quiz_description: '',
+            errors: {}
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const data = new FormData();
+        data.append('quiz_name', this.state.quiz_name);
+        data.append('quiz_description', this.state.quiz_description);
+        data.append('file', this.quiz_image.current.files[0]);
+
+        this.props.addQuiz(data);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+    }
+
+    render() {
+        const { errors } = this.state;
+        return(
+            <div className={s.add_quiz_form}>
+                <h2>Add quiz</h2>
+                <Form onSubmit={ this.handleSubmit }>
+                    <FormGroup>
+                        <Label>Add quiz name</Label>
+                        <Input
+                            invalid={!!errors.quiz_name}
+                            type="text"
+                            placeholder="Enter quiz name"
+                            name="quiz_name"
+                            onChange={ this.handleInputChange }
+                            value={ this.state.quiz_name }
+                        />
+                        <FormFeedback>{errors.quiz_name}</FormFeedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Add quiz description</Label>
+                        <Input
+                            invalid={!!errors.quiz_description}
+                            type="textarea"
+                            placeholder="Enter quiz name"
+                            name="quiz_description"
+                            onChange={ this.handleInputChange }
+                            value={ this.state.quiz_description }
+                        />
+                        <FormFeedback>{errors.quiz_description}</FormFeedback>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Add quiz image</Label>
+                        <Input
+                            invalid={!!errors.quiz_image}
+                            type="file"
+                            name="quiz_image"
+                            accept="image/jpeg,image/jpg,image/png"
+                            ref={this.quiz_image}
+                        />
+                        <FormText color="muted">
+                            Your can only download jpg and png file
+                        </FormText>
+                        <FormFeedback>{errors.quiz_image}</FormFeedback>
+                    </FormGroup>
+                    <FormGroup >
+                        <Button type="submit" color="success" block>Add</Button>
+                    </FormGroup>
+                </Form>
+            </div>
+        )
+    }
+}
+
+AddQuiz.propTypes = {
+    addQuiz: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+    errors: state.quizzes.error
+});
+
+export  default connect(mapStateToProps, {addQuiz})(AddQuiz)

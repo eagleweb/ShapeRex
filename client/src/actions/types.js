@@ -13,5 +13,8 @@ export const SEARCH_QUIZ_ERROR = 'SEARCH_QUIZ_ERROR';
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-export const ADD_QUIZ = 'ADD_QUIZ';
+export const ADD_QUIZ_START = 'ADD_QUIZ_START';
+export const ADD_QUIZ_SUCCESS = 'ADD_QUIZ_SUCCESS';
+export const ADD_QUIZ_ERROR = 'ADD_QUIZ_ERROR';
+
 export const DELETE_QUIZ = 'DELETE_QUIZ';

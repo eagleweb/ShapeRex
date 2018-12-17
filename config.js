@@ -6,5 +6,6 @@ module.exports = {
         preflightContinue: true,
         optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
     },
-    'secret': 'verystrongpassword'
+    'secret': 'verystrongpassword',
+    'googleMapURL': "https://maps.googleapis.com/maps/api/js?key=AIzaSyAUEyNoJ4_Qd5D7LvPL1vkog8FdraVqBao&v=3.exp"
 };

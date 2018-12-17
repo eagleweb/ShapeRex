@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
@@ -79,7 +80,7 @@ class Login extends Component {
                             onChange={ this.handleInputChange }
                             value={ this.state.password }
                         />
-                        {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                        <FormFeedback>{errors.password}</FormFeedback>
                     </FormGroup>
                     <FormGroup>
                         <Button type="submit" color="primary">
@@ -104,4 +105,4 @@ const mapStateToProps = (state) => ({
     errors: state.auth_error
 });
 
-export  default connect(mapStateToProps, { loginUser })(Login)
+export  default connect(mapStateToProps, { loginUser })(withRouter(Login))

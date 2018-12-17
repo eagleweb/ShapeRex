@@ -49,13 +49,23 @@ export const searchQuiz = search_phrase => dispatch => {
         }))
 };
 
-export const addQiuz = quiz => dispatch => {
-    axios.post('/api/quiz', quiz).then(res =>
-        dispatch({
-            type: ADD_QUIZ,
+export const addQuiz = quiz => dispatch => {
+    dispatch({
+        type: types.ADD_QUIZ_START
+    });
+
+    axios.post('/api/quiz', quiz,
+        {headers: {
+            'Content-Type': 'multipart/form-data'
+        }})
+        .then(res => dispatch({
+            type: types.ADD_QUIZ_SUCCESS,
             payload: res.data
-        })
-    );
+        }))
+        .catch(err => dispatch({
+                type: types.ADD_QUIZ_ERROR,
+                payload: err.response.data
+        }))
 };
 
 export const deleteQuiz = id => dispatch => {
