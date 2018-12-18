@@ -9,7 +9,7 @@ const validateQuizInput = require('../validation/quiz');
 quizRouter.route('/')
 
     .get(function (req, res) {
-        Quiz.find({},{quiz_name: 1, quiz_tag: 1, added: 1, quiz_description: 1}, function (err, result) {
+        Quiz.find({},{quiz_name: 1, quiz_tag: 1, quiz_image: 1, added: 1, quiz_description: 1}, function (err, result) {
             if (err) res.send(err);
             res.json(result);
         })
@@ -31,7 +31,6 @@ quizRouter.route('/')
             })
             .on('field', (name, value) => {
                 body[name] = value;
-                console.log(body);
             })
             .on('end', () => {
                 const { errors, isValid } = validateQuizInput(body);
@@ -73,7 +72,7 @@ quizRouter.route('/search')
         if (req.query.search === undefined || req.query.search === '') {
             res.json({success: false, message: 'Enter your search request!'});
         } else
-            Quiz.find({ $text : { $search : req.query.search } }, { score : { $meta: "textScore" }, quiz_name: 1, quiz_tag: 1, added: 1, quiz_description: 1 })
+            Quiz.find({ $text : { $search : req.query.search } }, { score : { $meta: "textScore" }, quiz_name: 1, quiz_image: 1, quiz_tag: 1, added: 1, quiz_description: 1 })
                 .sort({ score : { $meta : 'textScore' } })
                 // .limit(10)
                 .exec(function(err, result) {

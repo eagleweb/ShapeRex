@@ -9,9 +9,9 @@ import Help from './Help/Help'
 import s from './quizappcontainer.module.css'
 
 const AppContainer = () => (
-    <div className={s.container}>
-        <nav>
-            <ul className={s.menu}>
+    <div className={s.app_container}>
+        <nav className={s.menu}>
+            <ul>
                 <li><NavLink to="/quiz" activeClassName={s.item_active}>Quiz</NavLink></li>
                 <li><NavLink to="/quiz/account" activeClassName={s.item_active}>My account</NavLink></li>
                 <li><NavLink to="/quiz/statistic" activeClassName={s.item_active}>My statistics</NavLink></li>
@@ -19,15 +19,16 @@ const AppContainer = () => (
                 <li><NavLink to="/quiz/help" activeClassName={s.item_active}>Help</NavLink></li>
             </ul>
         </nav>
-
-        <Switch>
-        <Route exact path="/quiz" component={QuizSelect}/>
-        <Route path="/quiz/account" component={Account} />
-        <Route path="/quiz/statistic" component={Statistic} />
-        <Route path="/quiz/add" component={AddQuiz} />
-        <Route path="/quiz/help" component={Help} />
-        <Route path={`/quiz/:id`} component={QuestionPage} />
-        </Switch>
+        <div className={s.app_content}>
+            <Switch>
+                <Route exact path="/quiz" component={QuizSelect}/>
+                <Route path="/quiz/account" component={Account} />
+                <Route path="/quiz/statistic" component={Statistic} />
+                <Route path="/quiz/add" component={AddQuiz} />
+                <Route path="/quiz/help" component={Help} />
+                <Route path={`/quiz/:id`} component={QuestionPage} />
+            </Switch>
+        </div>
     </div>
 );
 

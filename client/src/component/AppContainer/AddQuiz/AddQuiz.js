@@ -51,7 +51,7 @@ class AddQuiz extends Component {
                 <h2>Add quiz</h2>
                 <Form onSubmit={ this.handleSubmit }>
                     <FormGroup>
-                        <Label>Add quiz name</Label>
+                        <Label>Quiz name</Label>
                         <Input
                             invalid={!!errors.quiz_name}
                             type="text"
@@ -63,11 +63,11 @@ class AddQuiz extends Component {
                         <FormFeedback>{errors.quiz_name}</FormFeedback>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Add quiz description</Label>
+                        <Label>Quiz description</Label>
                         <Input
                             invalid={!!errors.quiz_description}
                             type="textarea"
-                            placeholder="Enter quiz name"
+                            placeholder="Enter quiz description"
                             name="quiz_description"
                             onChange={ this.handleInputChange }
                             value={ this.state.quiz_description }
@@ -75,13 +75,13 @@ class AddQuiz extends Component {
                         <FormFeedback>{errors.quiz_description}</FormFeedback>
                     </FormGroup>
                     <FormGroup>
-                        <Label>Add quiz image</Label>
+                        <Label>Quiz image</Label>
                         <Input
                             invalid={!!errors.quiz_image}
                             type="file"
                             name="quiz_image"
                             accept="image/jpeg,image/jpg,image/png"
-                            ref={this.quiz_image}
+                            innerRef={this.quiz_image}
                         />
                         <FormText color="muted">
                             Your can only download jpg and png file
@@ -89,7 +89,7 @@ class AddQuiz extends Component {
                         <FormFeedback>{errors.quiz_image}</FormFeedback>
                     </FormGroup>
                     <FormGroup >
-                        <Button type="submit" color="success" block>Add</Button>
+                        <Button type="submit" color="success" block>Next</Button>
                     </FormGroup>
                 </Form>
             </div>

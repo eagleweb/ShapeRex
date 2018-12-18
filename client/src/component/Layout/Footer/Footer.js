@@ -3,7 +3,7 @@ import s from './footer.module.css'
 
 const Footer = () => (
     <footer className={s.footer}>
-        Footer
+        ShapeRex 2018
     </footer>
 
 );

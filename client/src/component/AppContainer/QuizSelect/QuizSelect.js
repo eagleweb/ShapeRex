@@ -83,7 +83,7 @@ class QuizSelect extends Component {
         }
         if (this.props.quizzes_list.length === 0) {
             return (
-                <div>
+                <React.Fragment>
                     <ToolBar
                         message={this.state.message}
                         setSearchPhrase={this.setSearchPhrase}
@@ -93,12 +93,11 @@ class QuizSelect extends Component {
                     />
                     <div>Nothing find. Sorry!</div>
                     <Button onClick={this.BackToQuiz}>Back to quiz page</Button>
-                </div>
+                </React.Fragment>
             )
         }
         return (
-
-            <div>
+            <React.Fragment>
                 <ToolBar
                     message={this.state.message}
                     setSearchPhrase={this.setSearchPhrase}
@@ -108,7 +107,7 @@ class QuizSelect extends Component {
                 />
                 {this.props.search_result ? <Button onClick={this.BackToQuiz} >Back to quiz page</Button> : null}
                 <CardView quizzes_list={this.props.quizzes_list}/>
-            </div>
+            </React.Fragment>
         )
     }
 

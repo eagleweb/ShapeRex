@@ -12,6 +12,6 @@
     font-size: 1.3rem;
 }
 
-.input {
-    /*max-width: 100px;*/
+.label {
+    float: right;
 }

@@ -10,17 +10,17 @@ import s from './home.module.css'
 
 const items = [
     {
-        src: null,
+        src: '1',
         altText: 'Slide 1',
         caption: 'Slide 1'
     },
     {
-        src: '',
+        src: '2',
         altText: 'Slide 2',
         caption: 'Slide 2'
     },
     {
-        src: '',
+        src: '3',
         altText: 'Slide 3',
         caption: 'Slide 3'
     }

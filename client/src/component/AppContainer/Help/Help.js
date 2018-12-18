@@ -1,7 +1,8 @@
 import React from 'react'
+import s from './help.module.css'
 
 const Help = () => (
-    <div>
+    <div className={s.help}>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam finibus lacus facilisis sem auctor, et condimentum lacus fringilla. Proin pulvinar mattis sem a vestibulum. Praesent semper eget erat consequat convallis. Phasellus posuere ultricies tristique. Donec volutpat turpis vel velit ultrices, eget ullamcorper tellus pharetra. Curabitur dapibus lectus at enim fermentum, in feugiat ipsum malesuada. Vestibulum mollis, orci eu tincidunt pharetra, ligula elit dignissim sapien, at aliquet odio erat nec libero. Sed a gravida felis. Aliquam erat volutpat. Donec porttitor orci magna, sed lobortis lectus iaculis vitae. Nullam felis lectus, ornare quis ante vel, dictum pharetra metus. Praesent pulvinar, urna at vehicula finibus, mauris ligula dictum ligula, at commodo libero dui at urna. Nulla facilisi. Ut fermentum metus eget auctor vulputate.</p>
         <p>Morbi porta in enim sit amet tincidunt. Vivamus elementum eu lorem ut tincidunt. Nunc lacinia bibendum metus at finibus. Phasellus elit dui, semper quis lorem non, ornare porttitor urna. Nulla aliquet convallis nisl at euismod. Donec vel volutpat urna. Nunc sagittis nisl leo, eget tempus turpis malesuada id.</p>
         <p>Aliquam varius varius velit eu varius. Sed varius nec risus sit amet vehicula. Nullam auctor mi varius, lacinia lacus a, bibendum sapien. Quisque tincidunt urna purus, sit amet auctor libero aliquam posuere. Cras ut efficitur massa. Donec ultrices tincidunt dolor, nec sollicitudin nulla elementum non. Donec a pharetra ligula, at consectetur elit. Aliquam viverra ante ac erat venenatis, eu auctor tellus faucibus. Nunc eleifend dolor nec risus suscipit, vitae sodales odio sodales. Suspendisse potenti.</p>

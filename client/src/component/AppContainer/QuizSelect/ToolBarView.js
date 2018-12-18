@@ -5,20 +5,19 @@ import s from './quizselect.module.css'
 const ToolBar = ({message, setSearchPhrase, StartSearch, SortByName, SortByDate}) => (
     <div className={s.tool_bar}>
         <Form onSubmit={StartSearch}>
-        <InputGroup>
-            <Input placeholder="Find quiz" onChange={setSearchPhrase} invalid={!!message} />
+        <InputGroup >
+            <Input className={s.search} placeholder="Find quiz" onChange={setSearchPhrase} invalid={!!message} />
             <InputGroupAddon addonType="append">
                 <Button type="submit" color="success">Search</Button>
             </InputGroupAddon>
             <FormFeedback>{message}</FormFeedback>
         </InputGroup>
         </Form>
-        <button onClick={SortByName}>
-            Sort
-        </button>
-        <button onClick={SortByDate}>
-            Date
-        </button>
+        <div className={s.sort}>
+            <span>Sort by: </span>
+            <a onClick={SortByName}>Name | </a>
+            <a onClick={SortByDate}>Date</a>
+        </div>
     </div>
 );
 

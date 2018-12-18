@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
 import s from './auth.module.css'
-import {Button, Form, FormGroup, FormFeedback, Jumbotron, Input} from 'reactstrap';
+import {Button, Form, FormGroup, FormFeedback, Jumbotron, Input, Label} from 'reactstrap';
 
 class Login extends Component {
 
@@ -86,6 +86,7 @@ class Login extends Component {
                         <Button type="submit" color="primary">
                             Login User
                         </Button>
+                        <Label className={s.label}>No account? <Link to='/register'>Create one</Link></Label>
                     </FormGroup>
                 </Form>
                 </Jumbotron>
