@@ -31,8 +31,8 @@ class Contact extends Component {
                     <h1>Contact to ShapeRex</h1>
                     <p>We respond within an hour daytime on the weekdays.</p>
                     <address>
-                        <p><span>Address: </span>Vinnytsia, Soborna 54</p>
-                        <p><span>Tell: </span><a href="tel:+1234567890">+1234567890</ a></p>
+                        <p>Address: Vinnytsia, Soborna 54</p>
+                        <p>Tell: <a href="tel:+1234567890">+1234567890</a></p>
                     </address>
                     <form className={s.contact_form} action="#" method="post">
                         <p>GOT QUESTIONS?</p>

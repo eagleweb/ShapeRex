@@ -1,21 +1,17 @@
 .app_container {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: flex-start;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
-    max-width: 1800px;
 }
 
 .menu {
-    border-bottom-left-radius: 8px;
-    border-top-left-radius: 8px;
-    padding: 10px 50px;
+    position: fixed;
+    top: 75px;
+    left: 0;
 }
 
 .menu ul {
-    margin: 0;
-    padding: 0;
+    padding: 10px;
 }
 
 .menu li {
@@ -23,10 +19,7 @@
 }
 
 .app_content {
-    min-height: 800px;
-    background: rgba(255, 255, 255, 0.6);
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
+    margin-left: 250px;
 }
 
 

@@ -14,8 +14,8 @@ const ToolBar = ({message, setSearchPhrase, StartSearch, SortByName, SortByDate}
         </InputGroup>
         </Form>
         <div className={s.sort}>
-            <span>Sort by: </span>
-            <a onClick={SortByName}>Name | </a>
+            Sort by:
+            <a onClick={SortByName}>Name</a>
             <a onClick={SortByDate}>Date</a>
         </div>
     </div>

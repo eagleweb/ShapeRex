@@ -1,8 +1,16 @@
+.header_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background: rgba(255, 255, 255, 1);
+}
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 60px;
 }
 
 .logo {
@@ -33,7 +41,7 @@
     margin: 30px 45px 0 0;
 }
 
-.login span {
+.login a {
     display: inline-block;
     position: relative;
     top: 50%;

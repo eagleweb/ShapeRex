@@ -23,9 +23,7 @@ class Header extends Component {
         const authLinks = (
             <div className={s.login}>
                 <img src={user.avatar} alt={user.name} title={user.name} />
-                <a href="#" onClick={this.onLogout}>
-                    <span>Logout</span>
-                </a>
+                <a href="#" onClick={this.onLogout}>Logout</a>
             </div>
         );
         const guestLinks = (
@@ -42,22 +40,24 @@ class Header extends Component {
         );
 
         return (
-        <header className={s.header}>
-            <div className={s.logo}>
-                <Link to="/">
-                    <img src={logo} alt="ShapeRex"/>
-                </Link>
+        <header className={s.header_container}>
+            <div className={s.header}>
+                <div className={s.logo}>
+                    <Link to="/">
+                        <img src={logo} alt="ShapeRex"/>
+                    </Link>
+                </div>
+                <nav>
+                    <ul className={s.menu}>
+                        <li><NavLink exact activeClassName={s.item_active} to="/">Home</NavLink></li>
+                        <li><NavLink activeClassName={s.item_active} to="/quiz">Quiz</NavLink></li>
+                        <li><NavLink activeClassName={s.item_active} to="/contact">Contact</NavLink></li>
+                    </ul>
+                </nav>
+                <nav>
+                    {isAuthenticated ? authLinks : guestLinks}
+                </nav>
             </div>
-            <nav>
-                <ul className={s.menu}>
-                    <li><NavLink exact activeClassName={s.item_active} to="/">Home</NavLink></li>
-                    <li><NavLink activeClassName={s.item_active} to="/quiz">Quiz</NavLink></li>
-                    <li><NavLink activeClassName={s.item_active} to="/contact">Contact</NavLink></li>
-                </ul>
-            </nav>
-            <nav>
-                {isAuthenticated ? authLinks : guestLinks}
-            </nav>
         </header>
         )
     }

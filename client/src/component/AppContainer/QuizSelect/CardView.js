@@ -1,8 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import s from './quizselect.module.css'
 
-const CardView = ({quizzes_list}) => (
+const CardView = ({quizzes_list, history}) => (
     <div className={s.cards_container}>
         {quizzes_list.map((item) =>
             <div key={item._id} className={s.card_item}>
@@ -10,7 +9,7 @@ const CardView = ({quizzes_list}) => (
                 <div className={s.card_description}>
                     <h2>{item.quiz_name}</h2>
                     <p>{item.quiz_description}</p>
-                    <button><NavLink to={`/quiz/${item._id}`}>Start</NavLink></button>
+                    <button onClick={() => history.push(`/quiz/${item._id}`)}>Start</button>
                 </div>
             </div>
         )}
