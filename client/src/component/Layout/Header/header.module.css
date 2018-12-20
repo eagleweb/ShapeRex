@@ -14,27 +14,26 @@
 }
 
 .logo {
-    margin: 28px 0 0 45px;
+    margin: 30px 0 20px 45px;
 }
 
 .menu li {
     display: inline-block;
-    line-height: 30px;
-}
-
-.menu > li > a {
-    position: relative;
-    margin: 28px 10px 0 0;
+    border-right: 2px solid #525457;
+    padding: 0 10px;
     font-size: 1.2rem;
-    text-decoration: none;
 }
 
-.menu li:hover {
-    text-decoration: underline;
+.menu li:last-child {
+    border-right: none;
+}
+
+.menu a {
+    color: #525457;
 }
 
 .item_active {
-    color: #ffb461;
+    text-decoration: underline;
 }
 
 .login {

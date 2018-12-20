@@ -37,7 +37,14 @@ class Question extends Component {
                         <FormGroup>
                             <div>
                                 {current_question.answer_variant.map((item, index) =>
-                                    <CustomInput key={item.toString()} name="customRadio" type="radio" id={index+1} label={item} onChange={this.handleChange} />
+                                    <CustomInput
+                                        key={item.toString()}
+                                        name="customRadio"
+                                        type="radio"
+                                        id={index+1}
+                                        label={item}
+                                        onChange={this.handleChange}
+                                    />
                                 )}
                             </div>
                         </FormGroup>

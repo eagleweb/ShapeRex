@@ -5,6 +5,7 @@ import Countdown from 'react-countdown-now'
 import { getQuiz } from '../../../actions/quizActions'
 import QuestionView from './QuestionView'
 import { Button } from 'reactstrap';
+import s from './question.module.css'
 
 class QuestionPage extends Component {
 
@@ -32,7 +33,7 @@ class QuestionPage extends Component {
         }
         if (this.state.flag) {
             return (
-            <div>
+            <div className={s.pre_question_container}>
                 <h2>{quiz.quiz_name}</h2>
                 <p>Your will have 30 minutes to answer 25 questions.</p>
                 <p>Are your ready?</p>
@@ -42,10 +43,19 @@ class QuestionPage extends Component {
             )
         }
         return (
-            <div>
+            <div className={s.question_container}>
                 <h2>{quiz.quiz_name}</h2>
-                Time: <Countdown onComplete={() => this.setState({time_end: true})} renderer={({minutes, seconds}) => <span>{minutes}:{seconds}</span>} date={Date.now() + 10000} />
-                {quiz.questions ? <QuestionView time_end={this.state.time_end} questions={quiz.questions} quiz_answer={quiz.quiz_answer} /> : null}
+                Time: <Countdown
+                onComplete={() => this.setState({time_end: true})}
+                renderer={({minutes, seconds}) => <span>{minutes}:{seconds}</span>}
+                date={Date.now() + 10000}
+                />
+                {quiz.questions ?
+                    <QuestionView
+                        time_end={this.state.time_end}
+                        questions={quiz.questions}
+                        quiz_answer={quiz.quiz_answer}
+                    /> : null}
             </div>
         )
     }

@@ -1,0 +1,14 @@
+.pre_question_container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.pre_question_container button {
+    margin-right: 10px;
+}
+
+.question_container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+

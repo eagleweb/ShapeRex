@@ -1,7 +1,8 @@
 .add_quiz_form {
+    max-width: 500px;
     background: #F9F9F9;
     padding: 25px;
-    margin: 30px 0;
+    margin: 30px auto;
     border-radius: 8px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
