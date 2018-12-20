@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addQuiz } from '../../../actions/quizActions'
@@ -19,23 +20,6 @@ class AddQuiz extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleInputChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-
-        const data = new FormData();
-        data.append('quiz_name', this.state.quiz_name);
-        data.append('quiz_description', this.state.quiz_description);
-        data.append('file', this.quiz_image.current.files[0]);
-
-        this.props.addQuiz(data);
-    }
-
     componentWillReceiveProps(nextProps) {
         if(nextProps.errors) {
             this.setState({
@@ -44,12 +28,27 @@ class AddQuiz extends Component {
         }
     }
 
+    handleInputChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit() {
+        const data = new FormData();
+        data.append('quiz_name', this.state.quiz_name);
+        data.append('quiz_description', this.state.quiz_description);
+        data.append('file', this.quiz_image.current.files[0]);
+
+        this.props.addQuiz(data, this.props.history);
+    }
+
     render() {
         const { errors } = this.state;
         return(
             <div className={s.add_quiz_form}>
                 <h2>Add quiz</h2>
-                <Form onSubmit={ this.handleSubmit }>
+                <Form>
                     <FormGroup>
                         <Label>Quiz name</Label>
                         <Input
@@ -89,7 +88,7 @@ class AddQuiz extends Component {
                         <FormFeedback>{errors.quiz_image}</FormFeedback>
                     </FormGroup>
                     <FormGroup >
-                        <Button type="submit" color="success" block>Next</Button>
+                        <Button onClick={this.handleSubmit} color="success" block>Next</Button>
                     </FormGroup>
                 </Form>
             </div>
@@ -105,4 +104,4 @@ const mapStateToProps = (state) => ({
     errors: state.quizzes.error
 });
 
-export  default connect(mapStateToProps, {addQuiz})(AddQuiz)
+export  default connect(mapStateToProps, {addQuiz})(withRouter(AddQuiz))

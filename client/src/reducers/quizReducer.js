@@ -3,6 +3,7 @@ import * as types from "../actions/types"
 const initialState = {
     quizzes_list: [],
     quiz: {},
+    last_added_quiz_id: null,
     isLoading: false,
     error: null,
     search_result: false
@@ -31,8 +32,14 @@ export default function (state = initialState, action) {
         case types.ADD_QUIZ_START:
             return {...state, isLoading: true, error: null};
         case types.ADD_QUIZ_SUCCESS:
-            return {...state, isLoading: false, error: null, quiz: action.payload};
+            return {...state, isLoading: false, error: null, last_added_quiz_id: action.payload.id};
         case types.ADD_QUIZ_ERROR:
+            return {...state, isLoading: false, error: action.payload};
+        case types.UPDATE_QUIZ_START:
+            return {...state, isLoading: true, error: null};
+        case types.UPDATE_QUIZ_SUCCESS:
+            return {...state, isLoading: false, error: null, quiz: action.payload};
+        case types.UPDATE_QUIZ_ERROR:
             return {...state, isLoading: false, error: action.payload};
         case types.DELETE_QUIZ:
             return {...state, quizzes: state.quizzes.filter(quiz => quiz._id !== action.payload)};

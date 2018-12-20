@@ -49,7 +49,7 @@ export const searchQuiz = search_phrase => dispatch => {
         }))
 };
 
-export const addQuiz = quiz => dispatch => {
+export const addQuiz = (quiz, history) => dispatch => {
     dispatch({
         type: types.ADD_QUIZ_START
     });
@@ -58,13 +58,36 @@ export const addQuiz = quiz => dispatch => {
         {headers: {
             'Content-Type': 'multipart/form-data'
         }})
-        .then(res => dispatch({
-            type: types.ADD_QUIZ_SUCCESS,
-            payload: res.data
-        }))
+        .then(res => {
+            dispatch({
+                type: types.ADD_QUIZ_SUCCESS,
+                payload: res.data
+            });
+            history.push('/quiz/add/question')
+            }
+        )
         .catch(err => dispatch({
                 type: types.ADD_QUIZ_ERROR,
                 payload: err.response.data
+        }))
+};
+
+export const updateQuiz = (id, data) => dispatch => {
+    dispatch({
+        type: types.UPDATE_QUIZ_START
+    });
+
+    axios.put(`/api/quiz/${id}`, data)
+        .then(res => {
+                dispatch({
+                    type: types.UPDATE_QUIZ_SUCCESS,
+                    payload: res.data
+                });
+            }
+        )
+        .catch(err => dispatch({
+            type: types.UPDATE_QUIZ_ERROR,
+            payload: err.response.data
         }))
 };
 

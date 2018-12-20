@@ -59,7 +59,8 @@ quizRouter.route('/')
                             if (err) {
                                 return res.status(400).json(err);
                             }
-                            res.json({success: true, message: 'Quiz added successfully'});
+
+                            res.json({id: newQuiz._id, success: true, message: 'Quiz added successfully'});
                         })
                     }
                 })
@@ -89,6 +90,13 @@ quizRouter.route('/:quiz_id')
             if (err) res.send(err);
             res.json(result);
         })
+    })
+
+    .put(function (req, res) {
+        Quiz.update({_id: req.params.quiz_id}, {$addToSet: {questions: {$each: req.body.question}}, $push: {quiz_answer: req.body.answer}}, function(err){
+            if (err) res.send(err);
+            res.json({success: true, message: 'Quiz updated!'})
+        });
     });
 
 module.exports = quizRouter;

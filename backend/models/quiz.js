@@ -10,7 +10,7 @@ const QuestionSchema = new Schema({
 const QuizSchema = new Schema({
     quiz_name: {type: String, required: true, unique: true},
     quiz_description: {type: String},
-    quiz_image: {type: String, default: ''},
+    quiz_image: {type: String, default: 'default.png'},
     quiz_tag: {type: Array, default: []},
     questions: [QuestionSchema],
     added: {type: Date, required: true, default: Date.now},

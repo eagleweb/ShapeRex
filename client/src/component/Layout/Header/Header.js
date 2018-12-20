@@ -47,11 +47,11 @@ class Header extends Component {
                         <img src={logo} alt="ShapeRex"/>
                     </Link>
                 </div>
-                <nav className={s.menu}>
-                    <ul>
-                        <li><NavLink exact activeClassName={s.item_active} to="/">Home</NavLink></li>
-                        <li><NavLink activeClassName={s.item_active} to="/quiz">Quiz</NavLink></li>
-                        <li><NavLink activeClassName={s.item_active} to="/contact">Contact</NavLink></li>
+                <nav>
+                    <ul className={s.menu_main}>
+                        <li><NavLink exact activeClassName={s.current} to="/">Home</NavLink></li>
+                        <li><NavLink activeClassName={s.current} to="/quiz">Quiz</NavLink></li>
+                        <li><NavLink activeClassName={s.current} to="/contact">Contact</NavLink></li>
                     </ul>
                 </nav>
                 <nav>
