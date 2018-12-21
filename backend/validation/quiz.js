@@ -1,7 +1,7 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
-module.exports = function validateRegisterInput(data) {
+module.exports = function validateQuizInput(data) {
     let errors = {};
     data.quiz_name = !isEmpty(data.quiz_name) ? data.quiz_name : '';
     data.quiz_description = !isEmpty(data.quiz_description) ? data.quiz_description : '';
@@ -14,7 +14,7 @@ module.exports = function validateRegisterInput(data) {
         errors.quiz_name = 'Name field is required';
     }
 
-    if(!Validator.isLength(data.quiz_description, { min: 50, max: 300 })) {
+    if(!Validator.isLength(data.quiz_description, { min: 5, max: 300 })) {
         errors.quiz_description = 'Quiz description must be between 50 to 300 chars';
     }
 

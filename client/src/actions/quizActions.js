@@ -63,7 +63,7 @@ export const addQuiz = (quiz, history) => dispatch => {
                 type: types.ADD_QUIZ_SUCCESS,
                 payload: res.data
             });
-            history.push('/quiz/add/question')
+            history.push('/quiz/add/question/1')
             }
         )
         .catch(err => dispatch({
@@ -72,17 +72,19 @@ export const addQuiz = (quiz, history) => dispatch => {
         }))
 };
 
-export const updateQuiz = (id, data) => dispatch => {
+export const updateQuiz = (id, data, history, page) => dispatch => {
     dispatch({
         type: types.UPDATE_QUIZ_START
     });
 
     axios.put(`/api/quiz/${id}`, data)
         .then(res => {
-                dispatch({
-                    type: types.UPDATE_QUIZ_SUCCESS,
-                    payload: res.data
-                });
+            dispatch({
+                type: types.UPDATE_QUIZ_SUCCESS,
+                payload: res.data
+            });
+            {console.log(page)}
+            history.push('/quiz/add/question/'+page)
             }
         )
         .catch(err => dispatch({

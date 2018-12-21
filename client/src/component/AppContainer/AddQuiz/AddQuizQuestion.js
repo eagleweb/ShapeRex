@@ -1,70 +1,93 @@
 import React, { Component } from 'react';
-import update from 'react-addons-update';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { updateQuiz } from '../../../actions/quizActions'
 import s from './addquiz.module.css'
-import {Button, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label} from 'reactstrap';
-
-const AnswerVariant = ({current_answer}) => {
-    return (
-        <InputGroup>
-            <InputGroupAddon addonType="prepend">{'Answer #' + current_answer}</InputGroupAddon>
-            <Input placeholder="Enter your answer variant" />
-        </InputGroup>
-    )
-};
+import {Button, Form, FormGroup, FormFeedback, Input, InputGroup, InputGroupAddon, Label} from 'reactstrap';
 
 class AddQuizQuestion extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.page = this.props.match.params.page;
         this.state = {
-            current_question: 1,
+            current_question: this.page,
             answer_count: 1,
-            questions: [],
-            quiz_answer: []
+            question: '',
+            answer: '',
+            errors: {},
+            answer_variant_1: '',
+            answer_variant_2: '',
+            answer_variant_3: '',
+            answer_variant_4: '',
+            answer_variant_5: '',
+            answer_variant_6: ''
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleInputChangeAnswer = this.handleInputChangeAnswer.bind(this);
         this.renderAnswerVariant = this.renderAnswerVariant.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleInputChangeAnswer(e) {
-        const initialArray = this.state.quiz_answer;
-
-        this.setState({
-            quiz_answer: update(initialArray, {})
-        })
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            });
+        }
+        if(nextProps.match.params.page) {
+            this.setState({
+                current_question: nextProps.match.params.page
+            });
+        }
     }
 
     handleInputChange(e) {
-
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
     handleSubmit() {
+        const newArray = [];
+        for (let i = 0; i < this.state.answer_count; i++) {
+            let temp = this.state['answer_variant_'+(i+1)];
+            newArray.push(temp);
+        }
+
         const data = {
-
+            answer: this.state.answer,
+            question: {
+                question: this.state.question,
+                answer_variant: newArray
+            }
         };
+        {console.log(data)}
 
-        this.props.updateQuiz(this.state.question_id, data);
-        this.setState({current_question: this.state.current_question + 1})
+        this.props.updateQuiz(this.props.question_id, data, this.props.history, ++this.state.current_question);
     }
 
     renderAnswerVariant () {
         let arr = [];
         for (let i = 0; i < this.state.answer_count; i++) {
-            arr.push(<AnswerVariant key={i} current_answer={i+1} />);
+            arr.push(
+            <InputGroup key={i}>
+                <InputGroupAddon addonType="prepend">{'Answer #' + (i+1)}</InputGroupAddon>
+                <Input
+                    type="text"
+                    name={'answer_variant_'+(i+1)}
+                    placeholder="Enter your answer variant"
+                    onChange={this.handleInputChange}
+                    value={this.state['answer_variant_'+(i+1)]}
+                />
+            </InputGroup>
+            )
         }
         return arr;
     }
 
     render() {
-        const {current_question} = this.state;
+        const {current_question, errors} = this.state;
         return(
             <div className={s.add_quiz_form}>
                 <h2>Add question</h2>
@@ -73,11 +96,14 @@ class AddQuizQuestion extends Component {
                     <InputGroup className={s.question_input}>
                         <InputGroupAddon addonType="prepend">Question</InputGroupAddon>
                         <Input
+                            invalid={!!errors.question}
                             type="text"
                             name="question"
                             placeholder="Enter your question here"
                             onChange={ this.handleInputChange }
+                            value={this.state.question}
                         />
+                        <FormFeedback>{errors.question}</FormFeedback>
                     </InputGroup>
                     { this.renderAnswerVariant()}
                     <Button
@@ -85,19 +111,31 @@ class AddQuizQuestion extends Component {
                         outline
                         color="success"
                         onClick = {() => this.setState({answer_count: this.state.answer_count + 1})}
+                        disabled={this.state.answer_count === 6}
                     >Add answer</Button>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend">Right answer</InputGroupAddon>
                         <Input
+                            invalid={!!errors.answer}
                             type="text"
-                            name="question"
-                            onChange={ this.handleInputChangeAnswer }
+                            name="answer"
+                            onChange={ this.handleInputChange }
+                            value={this.state.answer}
                             placeholder="Enter number of right answer"
                         />
+                        <FormFeedback>{errors.answer}</FormFeedback>
                     </InputGroup>
                     <FormGroup>
-                        <Button color="info" onClick={this.handleSubmit} className={s.finish_button}>Add next question</Button>
-                        <Button color="warning" className={s.finish_button}>Finish</Button>
+                        <Button
+                            color="info"
+                            onClick={this.handleSubmit}
+                            className={s.finish_button}
+                        >Add next question</Button>
+                        <Button
+                            color="warning"
+                            onClick={() => this.props.history.push('/quiz')}
+                            className={s.finish_button}
+                        >Finish</Button>
                     </FormGroup>
                 </Form>
             </div>
@@ -106,7 +144,8 @@ class AddQuizQuestion extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    question_id: state.quizzes.last_added_quiz_id
+    question_id: state.quizzes.last_added_quiz_id,
+    errors: state.quizzes.error
 });
 
-export  default connect(mapStateToProps, {updateQuiz})(AddQuizQuestion)
+export  default connect(mapStateToProps, {updateQuiz})(withRouter(AddQuizQuestion))

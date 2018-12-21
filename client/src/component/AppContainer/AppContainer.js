@@ -5,7 +5,6 @@ import QuestionPage from './QuestionPage/QuestionPage'
 import Account from './Account/Account'
 import Statistic from './Statistic/Statistic'
 import AddQuiz from './AddQuiz/AddQuiz'
-import AddQuizQuestion from './AddQuiz/AddQuizQuestion'
 import Help from './Help/Help'
 import s from './quizappcontainer.module.css'
 
@@ -25,8 +24,7 @@ const AppContainer = () => (
                 <Route exact path="/quiz" component={QuizSelect}/>
                 <Route path="/quiz/account" component={Account} />
                 <Route path="/quiz/statistic" component={Statistic} />
-                <Route exact path="/quiz/add" component={AddQuiz} />
-                <Route path="/quiz/add/question" component={AddQuizQuestion} />
+                <Route path="/quiz/add" component={AddQuiz} />
                 <Route path="/quiz/help" component={Help} />
                 <Route path={`/quiz/:id`} component={QuestionPage} />
             </Switch>

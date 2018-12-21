@@ -5,6 +5,7 @@ const formidable = require('formidable');
 mongoose.Promise = global.Promise;
 const Quiz = require('../models/quiz');
 const validateQuizInput = require('../validation/quiz');
+const validateQuestionInput = require('../validation/question');
 
 quizRouter.route('/')
 
@@ -93,7 +94,16 @@ quizRouter.route('/:quiz_id')
     })
 
     .put(function (req, res) {
-        Quiz.update({_id: req.params.quiz_id}, {$addToSet: {questions: {$each: req.body.question}}, $push: {quiz_answer: req.body.answer}}, function(err){
+
+        const { errors, isValid } = validateQuestionInput(req.body);
+
+        if(!isValid) {
+            return res.status(400).json(errors);
+        }
+
+        Quiz.updateOne({_id: req.params.quiz_id},
+            {$push: {quiz_answer: +req.body.answer, questions: req.body.question}},
+            function(err){
             if (err) res.send(err);
             res.json({success: true, message: 'Quiz updated!'})
         });
