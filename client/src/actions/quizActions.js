@@ -72,7 +72,7 @@ export const addQuiz = (quiz, history) => dispatch => {
         }))
 };
 
-export const updateQuiz = (id, data, history, page) => dispatch => {
+export const updateQuiz = (id, data, history, nextPage) => dispatch => {
     dispatch({
         type: types.UPDATE_QUIZ_START
     });
@@ -83,8 +83,7 @@ export const updateQuiz = (id, data, history, page) => dispatch => {
                 type: types.UPDATE_QUIZ_SUCCESS,
                 payload: res.data
             });
-            {console.log(page)}
-            history.push('/quiz/add/question/'+page)
+            history.push('/quiz/add/question/' + nextPage)
             }
         )
         .catch(err => dispatch({

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import AddQuizInformation from './AddQuizInformation'
 import AddQuizQuestion from './AddQuizQuestion'
 
@@ -10,4 +10,4 @@ const AddQuiz = () => (
             </Switch>
 );
 
-export default withRouter(AddQuiz)
+export default AddQuiz

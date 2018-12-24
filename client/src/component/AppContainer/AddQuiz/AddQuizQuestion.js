@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { updateQuiz } from '../../../actions/quizActions'
 import s from './addquiz.module.css'
 import {Button, Form, FormGroup, FormFeedback, Input, InputGroup, InputGroupAddon, Label} from 'reactstrap';
@@ -9,9 +8,8 @@ class AddQuizQuestion extends Component {
 
     constructor(props) {
         super(props);
-        this.page = this.props.match.params.page;
         this.state = {
-            current_question: this.page,
+            prevPage: this.props.match.params.page,
             answer_count: 1,
             question: '',
             answer: '',
@@ -29,17 +27,28 @@ class AddQuizQuestion extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
+    static getDerivedStateFromProps(props, state) {
+        if (props.match.params.page !== state.prevPage) {
+            return {
+                prevPage: props.match.params.page,
+                answer_count: 1,
+                question: '',
+                answer: '',
+                errors: {},
+                answer_variant_1: '',
+                answer_variant_2: '',
+                answer_variant_3: '',
+                answer_variant_4: '',
+                answer_variant_5: '',
+                answer_variant_6: ''
+            };
         }
-        if(nextProps.match.params.page) {
-            this.setState({
-                current_question: nextProps.match.params.page
-            });
+        if (props.errors) {
+            return {
+                errors: props.errors
+            };
         }
+        return null;
     }
 
     handleInputChange(e) {
@@ -64,7 +73,7 @@ class AddQuizQuestion extends Component {
         };
         {console.log(data)}
 
-        this.props.updateQuiz(this.props.question_id, data, this.props.history, ++this.state.current_question);
+        this.props.updateQuiz(this.props.question_id, data, this.props.history, this.state.prevPage+1);
     }
 
     renderAnswerVariant () {
@@ -87,12 +96,12 @@ class AddQuizQuestion extends Component {
     }
 
     render() {
-        const {current_question, errors} = this.state;
+        const {errors} = this.state;
         return(
             <div className={s.add_quiz_form}>
                 <h2>Add question</h2>
                 <Form>
-                    <Label>Question #{current_question}</Label>
+                    <Label>Question #{this.state.prevPage}</Label>
                     <InputGroup className={s.question_input}>
                         <InputGroupAddon addonType="prepend">Question</InputGroupAddon>
                         <Input
@@ -148,4 +157,4 @@ const mapStateToProps = (state) => ({
     errors: state.quizzes.error
 });
 
-export  default connect(mapStateToProps, {updateQuiz})(withRouter(AddQuizQuestion))
+export  default connect(mapStateToProps, {updateQuiz})(AddQuizQuestion)

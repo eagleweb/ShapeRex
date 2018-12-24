@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addQuiz } from '../../../actions/quizActions'
@@ -20,12 +19,13 @@ class AddQuizInformation extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.errors) {
-            this.setState({
-                errors: nextProps.errors
-            });
+    static getDerivedStateFromProps(props, state) {
+        if (props.errors) {
+            return {
+                errors: props.errors
+            }
         }
+        return null;
     }
 
     handleInputChange(e) {
@@ -104,4 +104,4 @@ const mapStateToProps = (state) => ({
     errors: state.quizzes.error
 });
 
-export  default connect(mapStateToProps, {addQuiz})(withRouter(AddQuizInformation))
+export  default connect(mapStateToProps, {addQuiz})(AddQuizInformation)
