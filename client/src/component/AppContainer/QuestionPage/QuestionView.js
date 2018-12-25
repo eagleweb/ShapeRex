@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'
 import QuizResult from './QuizResult'
 import { Button, Form, FormGroup, CustomInput, Card, CardHeader, CardBody, CardFooter } from 'reactstrap';
 
@@ -28,25 +29,23 @@ class Question extends Component {
     renderQuiz () {
         const current_question = this.props.questions[this.state.current];
         if (this.state.current === this.props.questions.length || this.props.time_end) {
-            return <QuizResult user_answer={this.state.user_answer} quiz_answer={this.props.quiz_answer} />
+            return <QuizResult user_answer={this.state.user_answer} quiz_answer={this.props.quiz_answer} history={this.props.history}/>
         } return (
             <Card>
                 <CardHeader>{current_question.question}</CardHeader>
                 <CardBody>
                     <Form>
                         <FormGroup>
-                            <div>
-                                {current_question.answer_variant.map((item, index) =>
-                                    <CustomInput
-                                        key={item.toString()}
-                                        name="customRadio"
-                                        type="radio"
-                                        id={index+1}
-                                        label={item}
-                                        onChange={this.handleChange}
-                                    />
-                                )}
-                            </div>
+                            {current_question.answer_variant.map((item, index) =>
+                                <CustomInput
+                                    key={item.toString()}
+                                    name="customRadio"
+                                    type="radio"
+                                    id={index+1}
+                                    label={item}
+                                    onChange={this.handleChange}
+                                />
+                            )}
                         </FormGroup>
                         <Button color="success" onClick={this.nextQuestion}>Answer</Button>
                     </Form>
@@ -65,4 +64,4 @@ class Question extends Component {
     }
 }
 
-export default Question
+export default withRouter(Question)

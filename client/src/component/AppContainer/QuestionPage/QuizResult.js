@@ -1,7 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Button } from 'reactstrap';
 
-const QuizResult = ({user_answer, quiz_answer}) => {
+const QuizResult = ({user_answer, quiz_answer, history}) => {
 
     let right_answer = 0;
     const answer_length = user_answer.length;
@@ -28,8 +28,8 @@ const QuizResult = ({user_answer, quiz_answer}) => {
 
     return (
         <div>
-            <p>You result is {Math.round(result)} % of right answer!</p>
-            <NavLink to="/quiz">Back to quiz page</NavLink>
+            <h2>You result is {Math.round(result)} % of right answer!</h2>
+            <Button color="warning" onClick={() => history.push('/quiz')}>Back to quiz page</Button>
         </div>
     )
 };

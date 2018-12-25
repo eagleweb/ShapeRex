@@ -17,3 +17,11 @@
     margin-top: 75px;
     flex: 1 0 auto;
 }
+
+a, a:visited {
+    color: #525457
+}
+
+a:hover {
+    color: #fe9017
+}

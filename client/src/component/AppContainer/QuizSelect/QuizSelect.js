@@ -105,7 +105,7 @@ class QuizSelect extends Component {
                     SortByName={this.SortByName}
                     SortByDate={this.SortByDate}
                 />
-                {this.props.search_result ? <Button onClick={this.BackToQuiz} >Back to quiz page</Button> : null}
+                {this.props.search_result ? <Button onClick={this.BackToQuiz}>Back to quiz page</Button> : null}
                 <CardView quizzes_list={this.props.quizzes_list} history={this.props.history}/>
             </React.Fragment>
         )

@@ -11,11 +11,13 @@ class QuestionPage extends Component {
 
     constructor(props) {
         super(props);
-        this.renderQuiz = this.renderQuiz.bind(this);
+
         this.state = {
             flag: true,
             time_end: false
         };
+
+        this.renderQuiz = this.renderQuiz.bind(this);
     }
 
 
@@ -35,7 +37,7 @@ class QuestionPage extends Component {
             return (
             <div className={s.pre_question_container}>
                 <h2>{quiz.quiz_name}</h2>
-                <p>Your will have 30 minutes to answer 25 questions.</p>
+                <p>Your will have 10 minutes to answer 25 questions.</p>
                 <p>Are your ready?</p>
                 <Button color="success" onClick={() => this.setState({flag: false})}>Yes</Button>
                 <Button color="warning" onClick={() => this.props.history.push('/quiz')} >No, go back!</Button>
@@ -48,10 +50,9 @@ class QuestionPage extends Component {
                 Time: <Countdown
                 onComplete={() => this.setState({time_end: true})}
                 renderer={({minutes, seconds}) => <span>{minutes}:{seconds}</span>}
-                date={Date.now() + 10000}
+                date={Date.now() + 600000}
                 />
-                {quiz.questions ?
-                    <QuestionView
+                {quiz.questions ? <QuestionView
                         time_end={this.state.time_end}
                         questions={quiz.questions}
                         quiz_answer={quiz.quiz_answer}

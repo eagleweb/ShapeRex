@@ -4,9 +4,15 @@
     align-items: flex-start;
 }
 
+.app_content {
+    width: 100%;
+    margin-left: 300px;
+    margin-right: 50px;
+}
+
 .menu {
     position: fixed;
-    top: 75px;
+    top: 150px;
     left: 0;
 }
 
@@ -16,13 +22,66 @@
 
 .menu li {
     list-style-type: none;
+    margin: 10px 0;
 }
 
-.app_content {
-    width: 100%;
-    margin-left: 250px;
+.menu li a:hover {
+    text-decoration: none;
 }
 
+.menu_item:before {
+    display: inline-block;
+    position: relative;
+    content: '';
+    margin: 0 20px 0 50px;
+    left: 0;
+    top: 3px;
+}
+
+.quiz:before {
+    width: 16px; height: 16px;
+    background: url('../../assets/img/css_sprites.png') -84px -10px;
+}
+
+.quiz:hover:before {
+    background: url('../../assets/img/css_sprites.png') -84px -46px;
+}
+
+.account:before {
+    width: 16px; height: 16px;
+    background: url('../../assets/img/css_sprites.png') -10px -48px;
+}
+
+.account:hover:before {
+    background: url('../../assets/img/css_sprites.png') -46px -48px;
+}
+
+.statistic:before {
+    width: 16px; height: 16px;
+    background: url('../../assets/img/css_sprites.png') -10px -84px;
+}
+
+.statistic:hover:before {
+    background: url('../../assets/img/css_sprites.png') -46px -84px;
+}
+
+.add_quiz:before {
+    width: 16px; height: 16px;
+    background: url('../../assets/img/css_sprites.png') -120px -10px;
+}
+
+.add_quiz:hover:before {
+    background: url('../../assets/img/css_sprites.png') -120px -44px;
+}
+
+.help:before {
+    width: 16px; height: 16px;
+    background: url('../../assets/img/css_sprites.png') -10px -120px;
+}
+
+.help:hover:before {
+    background: url('../../assets/img/css_sprites.png') -38px -120px;
+}
 
 
 

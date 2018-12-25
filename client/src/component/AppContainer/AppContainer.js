@@ -12,11 +12,11 @@ const AppContainer = () => (
     <div className={s.app_container}>
         <nav className={s.menu}>
             <ul>
-                <li><NavLink to="/quiz" activeClassName={s.item_active}>Quiz</NavLink></li>
-                <li><NavLink to="/quiz/account" activeClassName={s.item_active}>My account</NavLink></li>
-                <li><NavLink to="/quiz/statistic" activeClassName={s.item_active}>My statistics</NavLink></li>
-                <li><NavLink to="/quiz/add" activeClassName={s.item_active}>Add quiz</NavLink></li>
-                <li><NavLink to="/quiz/help" activeClassName={s.item_active}>Help</NavLink></li>
+                <li><NavLink to="/quiz" className={`${s.quiz} ${s.menu_item}`}>Quiz</NavLink></li>
+                <li><NavLink to="/quiz/account" className={`${s.account} ${s.menu_item}`}>My account</NavLink></li>
+                <li><NavLink to="/quiz/statistic" className={`${s.statistic} ${s.menu_item}`}>My statistics</NavLink></li>
+                <li><NavLink to="/quiz/add" className={`${s.add_quiz} ${s.menu_item}`}>Add quiz</NavLink></li>
+                <li><NavLink to="/quiz/help" className={`${s.help} ${s.menu_item}`}>Help</NavLink></li>
             </ul>
         </nav>
         <div className={s.app_content}>
