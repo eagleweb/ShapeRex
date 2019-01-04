@@ -43,6 +43,10 @@
     max-width: 250px;
 }
 
+.card_description h2{
+    text-align: center;
+}
+
 .card_description button {
     display: block;
     cursor: pointer;

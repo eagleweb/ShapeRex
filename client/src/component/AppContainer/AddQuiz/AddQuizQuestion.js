@@ -73,7 +73,7 @@ class AddQuizQuestion extends Component {
         };
         {console.log(data)}
 
-        this.props.updateQuiz(this.props.question_id, data, this.props.history, this.state.prevPage+1);
+        this.props.updateQuiz(this.props.question_id, data, this.props.history, +this.state.prevPage+1);
     }
 
     renderAnswerVariant () {
