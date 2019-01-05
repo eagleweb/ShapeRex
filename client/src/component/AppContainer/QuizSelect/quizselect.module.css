@@ -37,6 +37,7 @@
 .card_item img {
     display: block;
     margin: 0 auto;
+    max-width: 250px;
 }
 
 .card_description {

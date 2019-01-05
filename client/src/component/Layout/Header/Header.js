@@ -50,7 +50,15 @@ class Header extends Component {
                 <nav>
                     <ul className={s.menu_main}>
                         <li><NavLink exact activeClassName={s.current} to="/">Home</NavLink></li>
-                        <li><NavLink activeClassName={s.current} to="/quiz">Quiz</NavLink></li>
+                        <li className={s.drop_down}><NavLink activeClassName={s.current} to="/quiz">Quiz</NavLink>
+                            <ul className={s.sub_menu}>
+                                <li><NavLink to="/quiz">Quiz</NavLink></li>
+                                <li><NavLink to="/quiz/account">Account</NavLink></li>
+                                <li><NavLink to="/quiz/statistic">Statistic</NavLink></li>
+                                <li><NavLink to="/quiz/add">Add quiz</NavLink></li>
+                                <li><NavLink to="/quiz/help">Help</NavLink></li>
+                            </ul>
+                        </li>
                         <li><NavLink activeClassName={s.current} to="/contact">Contact</NavLink></li>
                     </ul>
                 </nav>

@@ -52,6 +52,36 @@
 .menu_main a:hover:before, .menu_main .current:before {left: 0;}
 .menu_main a:hover:after, .menu_main .current:after {right: 0;}
 
+.drop_down {
+    position: relative;
+}
+
+.drop_down:hover .sub_menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sub_menu {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    list-style: none;
+    left: -100%;
+    top: 40px;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 8px;
+    z-index: 99;
+    padding: 0 0 5px 0;
+    transition: all .3s ease .15s;
+}
+
+.sub_menu li {
+    border: none;
+    min-width: 200px;
+    padding: 5px 40px;
+}
+
 .login {
     margin: 30px 45px 0 0;
 }
