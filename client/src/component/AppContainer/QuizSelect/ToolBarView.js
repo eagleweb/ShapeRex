@@ -8,7 +8,7 @@ const ToolBar = ({message, setSearchPhrase, StartSearch, SortByName, SortByDate}
         <InputGroup >
             <Input className={s.search} placeholder="Find quiz" onChange={setSearchPhrase} invalid={!!message} />
             <InputGroupAddon addonType="append">
-                <Button type="submit" color="success">Search</Button>
+                <Button type="submit">Search</Button>
             </InputGroupAddon>
             <FormFeedback>{message}</FormFeedback>
         </InputGroup>

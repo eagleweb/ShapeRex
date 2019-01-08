@@ -8,10 +8,14 @@
     padding-top: 10px;
     min-width: 20em;
     outline: none;
-    border: none;
-    border-bottom: 1px solid #cbcdd0;
+    border: 2px solid #aaaaaa;
+    border-radius: 8px;
     background: inherit;
     line-height: 30px;
+}
+
+.sort {
+    color: #525457;
 }
 
 .sort a {
@@ -21,13 +25,13 @@
 
 .cards_container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
 .card_item {
     max-width: 300px;
-    margin: 10px 30px;
+    margin: 10px 20px;
     background: #F9F9F9;
     padding: 10px 25px;
     border-radius: 8px;

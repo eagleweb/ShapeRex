@@ -38,6 +38,26 @@ class Header extends Component {
                 </ul>
             </div>
         );
+        const mobileMenu = (
+          <nav className={s.mobile_menu}>
+              <input type="checkbox" id="menu" className={s.hidden_menu_ticker} />
+                  <label className={s.btn_menu} htmlFor="menu">
+                      <span className={s.first_span}></span>
+                      <span className={s.second_span}></span>
+                      <span className={s.third_span}></span>
+                  </label>
+                  <ul className={s.header_menu}>
+                      <li><NavLink to="/quiz">Quiz</NavLink></li>
+                      <li><NavLink to="/quiz/account">Account</NavLink></li>
+                      <li><NavLink to="/quiz/statistic">Statistic</NavLink></li>
+                      <li><NavLink to="/quiz/add">Add quiz</NavLink></li>
+                      <li><NavLink to="/quiz/help">Help</NavLink></li>
+                      {isAuthenticated ?
+                          <li><a href="#" onClick={this.onLogout}>Logout</a></li> :
+                          <li><NavLink to="/login">Sign In</NavLink></li>}
+                  </ul>
+          </nav>
+        );
 
         return (
         <header className={s.header_container}>
@@ -65,6 +85,7 @@ class Header extends Component {
                 <nav>
                     {isAuthenticated ? authLinks : guestLinks}
                 </nav>
+                {mobileMenu}
             </div>
         </header>
         )

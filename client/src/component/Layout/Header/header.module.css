@@ -11,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -106,6 +107,108 @@
 .login li {
     display: inline-block;
     margin-right: 5px;
+}
+
+.mobile_menu {
+    display: none;
+}
+
+@media only screen and (max-width : 480px) {
+
+    .logo {
+        margin: 20px 0 10px 35px;
+    }
+
+    .menu_main {
+        display: none;
+    }
+
+    .login {
+        display: none;
+    }
+
+    .mobile_menu {
+        display: block;
+    }
+
+    .header_menu {
+        display: block;
+        position: fixed;
+        list-style:none;
+        padding: 30px 10px 0 20px;
+        margin: 0;
+        box-sizing: border-box;
+        width: 200px;
+        height: 180px;
+        background-color: #FFFFFF;
+        top: 5px;
+        right: -200px;
+        transition: right .2s;
+        z-index: 2;
+    }
+
+    .hidden_menu_ticker {
+        display: none;
+    }
+
+    .btn_menu {
+        color: #fff;
+        background-color: #fff;
+        padding: 2px;
+        position: absolute;
+        top: 15px;
+        right: 5px;
+        cursor: pointer;
+        transition: right .23s;
+        z-index: 3;
+        width: 20px;
+    }
+
+    .btn_menu span {
+        display: block;
+        height: 2px;
+        background-color: #2b343c;
+        margin: 5px 0 0;
+        transition: all .1s linear .23s;
+        position: relative;
+    }
+
+    .btn_menu span.first_span {
+        margin-top: 0;
+    }
+
+    .hidden_menu_ticker:checked ~ .btn_menu {
+        position: fixed;
+        right: 170px;
+        background-color: #FFFFFF;
+    }
+
+    .hidden_menu_ticker:checked ~ .header_menu {
+        right: 0;
+    }
+    .hidden_menu_ticker:checked ~ .btn_menu span.first_span {
+        transform: rotate(45deg);
+        top: 7px;
+        background-color: #2b343c;
+    }
+    .hidden_menu_ticker:checked ~ .btn_menu span.second_span {
+        opacity: 0;
+    }
+
+    .hidden_menu_ticker:checked ~ .btn_menu span.third_span {
+        transform: rotate(-45deg);
+        top: -7px;
+        background-color: #2b343c;
+    }
+
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
 }
 
 
