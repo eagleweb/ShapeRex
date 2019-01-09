@@ -83,5 +83,30 @@
 }
 
 
+@media only screen and (max-width : 480px) {
+
+    .app_content {
+        margin-left: 0;
+    }
+
+    .menu {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+
+    .app_content {
+        margin-left: 165px;
+    }
+
+    .menu_item:before {
+        margin: 0 5px 0 5px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
 
 
